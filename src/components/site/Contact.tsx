@@ -30,7 +30,7 @@ export function Contact() {
 
         <div className="mt-12 flex flex-col items-center gap-4">
           <a
-            href="mailto:majidov@anthro.industries"
+            href="mailto:info@anthro.industries"
             className="group inline-flex items-center gap-4 border border-primary/40 bg-surface/40 px-8 py-5 font-mono text-sm tracking-wide text-foreground backdrop-blur transition-all hover:border-primary hover:shadow-[0_0_60px_oklch(0.85_0.14_195/0.3)]"
           >
             <span className="h-2 w-2 bg-primary" />
