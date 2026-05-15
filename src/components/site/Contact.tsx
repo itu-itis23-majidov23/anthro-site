@@ -34,7 +34,7 @@ export function Contact() {
             className="group inline-flex items-center gap-4 border border-primary/40 bg-surface/40 px-8 py-5 font-mono text-sm tracking-wide text-foreground backdrop-blur transition-all hover:border-primary hover:shadow-[0_0_60px_oklch(0.85_0.14_195/0.3)]"
           >
             <span className="h-2 w-2 bg-primary" />
-            majidov@anthro.industries
+            info@anthro.industries
             <span className="text-primary transition-transform group-hover:translate-x-1">→</span>
           </a>
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
