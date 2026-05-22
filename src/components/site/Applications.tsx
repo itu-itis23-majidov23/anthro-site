@@ -3,11 +3,31 @@ import applications from "@/assets/applications.jpg";
 
 export function Applications() {
   const apps = [
-    { code: "LOG-01", title: "Logistics & warehouse", body: "Pick, place, sort, and transport across high-mix fulfillment environments." },
-    { code: "IND-02", title: "Industrial work", body: "Repetitive, hazardous, or precision tasks alongside human operators on the line." },
-    { code: "PUB-03", title: "Guidance & assistance", body: "Information, wayfinding, and physical assistance in public-facing environments." },
-    { code: "FAC-04", title: "Facility operations", body: "Maintenance, monitoring, and routine support tasks across distributed sites." },
-    { code: "RES-05", title: "Research platforms", body: "Deployable humanoid platforms for academic and applied robotics research." },
+    {
+      code: "LOG-01",
+      title: "Logistics & warehouse",
+      body: "Pick, place, sort, and transport across high-mix fulfillment environments.",
+    },
+    {
+      code: "IND-02",
+      title: "Industrial work",
+      body: "Repetitive, hazardous, or precision tasks alongside human operators on the line.",
+    },
+    {
+      code: "PUB-03",
+      title: "Guidance & assistance",
+      body: "Information, wayfinding, and physical assistance in public-facing environments.",
+    },
+    {
+      code: "FAC-04",
+      title: "Facility operations",
+      body: "Maintenance, monitoring, and routine support tasks across distributed sites.",
+    },
+    {
+      code: "RES-05",
+      title: "Research platforms",
+      body: "Deployable humanoid platforms for academic and applied robotics research.",
+    },
   ];
 
   return (

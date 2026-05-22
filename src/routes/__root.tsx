@@ -8,6 +8,9 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
+
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -72,14 +75,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AnthRo — Anthropomorphic Robotics" },
+      {
+        name: "description",
+        content:
+          "AnthRo builds general-purpose humanoid robots for logistics, industrial, and real-world environments.",
+      },
+      { name: "author", content: "AnthRo" },
+      { property: "og:title", content: "AnthRo — Anthropomorphic Robotics" },
+      {
+        property: "og:description",
+        content:
+          "Humanoid robots engineered for the physical world. Built end-to-end, deployed where work happens.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
@@ -113,7 +123,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="relative min-h-screen bg-background text-foreground">
+        <Nav />
+        <Outlet />
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }

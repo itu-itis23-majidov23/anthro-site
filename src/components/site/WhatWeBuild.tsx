@@ -1,14 +1,39 @@
+import { Link } from "@tanstack/react-router";
 import { SectionLabel } from "./SectionLabel";
 import robotHand from "@/assets/robot-hand.jpg";
 
 export function WhatWeBuild() {
   const items = [
-    { n: "01", title: "Humanoid systems", desc: "Full-body bipedal platforms designed for unstructured human environments." },
-    { n: "02", title: "Motion & locomotion", desc: "Dynamic balance, terrain adaptation, and whole-body control at human scale." },
-    { n: "03", title: "AI perception", desc: "Multi-modal sensing and decision making for unstructured, real-world spaces." },
-    { n: "04", title: "Manipulation", desc: "Dexterous hands and tactile interaction for grasping the unfamiliar." },
-    { n: "05", title: "Collaboration", desc: "Human-robot interfaces engineered for safety, intent, and trust." },
-    { n: "06", title: "Embodied compute", desc: "On-device inference stacks tuned for low-latency physical control." },
+    {
+      n: "01",
+      title: "Humanoid systems",
+      desc: "Full-body bipedal platforms designed for unstructured human environments.",
+    },
+    {
+      n: "02",
+      title: "Motion & locomotion",
+      desc: "Dynamic balance, terrain adaptation, and whole-body control at human scale.",
+    },
+    {
+      n: "03",
+      title: "AI perception",
+      desc: "Multi-modal sensing and decision making for unstructured, real-world spaces.",
+    },
+    {
+      n: "04",
+      title: "Manipulation",
+      desc: "Dexterous hands and tactile interaction for grasping the unfamiliar.",
+    },
+    {
+      n: "05",
+      title: "Collaboration",
+      desc: "Human-robot interfaces engineered for safety, intent, and trust.",
+    },
+    {
+      n: "06",
+      title: "Embodied compute",
+      desc: "On-device inference stacks tuned for low-latency physical control.",
+    },
   ];
 
   return (
@@ -48,20 +73,31 @@ export function WhatWeBuild() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-px bg-border/60 sm:grid-cols-2">
-            {items.map((it) => (
-              <div
-                key={it.n}
-                className="group relative bg-background p-8 transition-colors hover:bg-surface/40"
-              >
-                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
-                  {it.n}
+          <div>
+            <div className="grid grid-cols-1 gap-px bg-border/60 sm:grid-cols-2">
+              {items.map((it) => (
+                <div
+                  key={it.n}
+                  className="group relative bg-background p-8 transition-colors hover:bg-surface/40"
+                >
+                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+                    {it.n}
+                  </div>
+                  <h3 className="mt-6 font-display text-2xl tracking-tight">{it.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+                  <div className="absolute right-4 top-4 h-2 w-2 border border-primary/60 opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
-                <h3 className="mt-6 font-display text-2xl tracking-tight">{it.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
-                <div className="absolute right-4 top-4 h-2 w-2 border border-primary/60 opacity-0 transition-opacity group-hover:opacity-100" />
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="mt-10">
+              <Link
+                to="/products"
+                className="group inline-flex items-center gap-3 border border-border bg-surface/40 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground transition-all hover:border-primary/60 hover:text-primary"
+              >
+                Explore the catalog
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

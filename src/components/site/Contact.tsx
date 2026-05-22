@@ -1,9 +1,6 @@
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden border-t border-border/60 py-32"
-    >
+    <section id="contact" className="relative overflow-hidden border-t border-border/60 py-32">
       <div className="absolute inset-0 bg-grid mask-radial opacity-50" />
       <div
         className="absolute left-1/2 top-1/2 -z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60"

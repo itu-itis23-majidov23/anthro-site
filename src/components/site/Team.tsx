@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { SectionLabel } from "./SectionLabel";
 
 export function Team() {
@@ -35,6 +36,15 @@ export function Team() {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="mt-10">
+              <Link
+                to="/about"
+                className="group inline-flex items-center gap-3 border border-border bg-surface/40 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground transition-all hover:border-primary/60 hover:text-primary"
+              >
+                Meet the team
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
             </div>
           </div>
         </div>

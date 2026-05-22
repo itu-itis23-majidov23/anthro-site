@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { SectionLabel } from "./SectionLabel";
+import { SchematicViewer } from "./SchematicViewer";
 import schematicFront from "@/assets/tech-schematic.jpg";
 import schematicSide from "@/assets/tech-schematic-side.jpg";
 import schematicCutaway from "@/assets/tech-schematic-cutaway.jpg";
@@ -8,17 +9,31 @@ const views = [
   { id: "front", label: "Front", code: "R3-F", src: schematicFront },
   { id: "side", label: "Side", code: "R3-S", src: schematicSide },
   { id: "cutaway", label: "Cutaway", code: "R3-X", src: schematicCutaway },
-] as const;
+];
 
 export function Technology() {
-  const [view, setView] = useState<(typeof views)[number]["id"]>("front");
-  const active = views.find((v) => v.id === view)!;
   const stack = [
-    { layer: "L05", name: "AI perception systems", detail: "Vision-language-action models for general scene understanding." },
+    {
+      layer: "L05",
+      name: "AI perception systems",
+      detail: "Vision-language-action models for general scene understanding.",
+    },
     { layer: "L04", name: "Real-time control", detail: "Whole-body MPC at kilohertz cadence." },
-    { layer: "L03", name: "Sensor fusion", detail: "Vision, tactile, IMU, and proprioception in a single state estimator." },
-    { layer: "L02", name: "Embedded hardware", detail: "Custom compute and actuator drivers integrated at the chassis level." },
-    { layer: "L01", name: "Mechatronics", detail: "Proprietary actuators, structure, and dexterous end-effectors." },
+    {
+      layer: "L03",
+      name: "Sensor fusion",
+      detail: "Vision, tactile, IMU, and proprioception in a single state estimator.",
+    },
+    {
+      layer: "L02",
+      name: "Embedded hardware",
+      detail: "Custom compute and actuator drivers integrated at the chassis level.",
+    },
+    {
+      layer: "L01",
+      name: "Mechatronics",
+      detail: "Proprietary actuators, structure, and dexterous end-effectors.",
+    },
   ];
 
   return (
@@ -40,40 +55,8 @@ export function Technology() {
               tuned for embodied performance in the real world.
             </p>
 
-            <div className="relative mt-10 aspect-square max-w-md overflow-hidden border border-border/80">
-              {views.map((v) => (
-                <img
-                  key={v.id}
-                  src={v.src}
-                  alt={`Humanoid robot wireframe schematic — ${v.label} view`}
-                  loading="lazy"
-                  width={1280}
-                  height={1280}
-                  className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-                    v.id === view ? "opacity-100 animate-float" : "opacity-0"
-                  }`}
-                />
-              ))}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent animate-scan" />
-              <div className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                / Chassis-Schematic-{active.code}
-              </div>
-            </div>
-
-            <div className="mt-4 flex max-w-md gap-px bg-border/60">
-              {views.map((v) => (
-                <button
-                  key={v.id}
-                  onClick={() => setView(v.id)}
-                  className={`flex-1 bg-background px-4 py-3 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors ${
-                    v.id === view
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {v.label}
-                </button>
-              ))}
+            <div className="mt-10 max-w-md">
+              <SchematicViewer views={views} />
             </div>
           </div>
 
@@ -109,6 +92,16 @@ export function Technology() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-10">
+              <Link
+                to="/products"
+                className="group inline-flex items-center gap-3 border border-border bg-surface/40 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground transition-all hover:border-primary/60 hover:text-primary"
+              >
+                View products
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
             </div>
           </div>
         </div>
