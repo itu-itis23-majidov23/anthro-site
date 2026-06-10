@@ -18,11 +18,11 @@ const vertexShader = /* glsl */ `
     vHeight = aHeight;
     vec3 p = position;
 
-    // per-particle shimmer + slow whole-body breathing
+    // subtle particle shimmer — restrained, mechanical rather than organic
     float t = uTime * 1.4 + aSeed * 6.2831;
-    p.x += sin(t * 1.7 + aSeed * 90.0) * 0.006;
-    p.y += sin(t * 1.3 + aSeed * 70.0) * 0.006 + sin(uTime * 0.9) * 0.01 * aHeight;
-    p.z += cos(t * 1.5 + aSeed * 50.0) * 0.006;
+    p.x += sin(t * 1.7 + aSeed * 90.0) * 0.003;
+    p.y += sin(t * 1.3 + aSeed * 70.0) * 0.003 + sin(uTime * 0.9) * 0.004 * aHeight;
+    p.z += cos(t * 1.5 + aSeed * 50.0) * 0.003;
 
     // bottom-up materialization scan
     float edge = smoothstep(uReveal, uReveal - 0.1, aHeight);

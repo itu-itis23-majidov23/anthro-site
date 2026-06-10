@@ -53,7 +53,7 @@ function SceneContent() {
   const isWide = useThree((s) => s.size.width >= 1024);
   const { cloud, segments } = useMemo(() => {
     const cloud = sampleHumanoid(isMobile ? 8000 : 15000);
-    return { cloud, segments: sampleLinks(cloud, 80) };
+    return { cloud, segments: sampleLinks(cloud, 60) };
   }, [isMobile]);
 
   return (
