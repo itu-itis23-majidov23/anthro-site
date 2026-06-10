@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -33,7 +36,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <MotionProvider>
+          <Nav />
+          {children}
+          <Footer />
+        </MotionProvider>
+      </body>
     </html>
   );
 }
