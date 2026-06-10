@@ -1,7 +1,21 @@
+import { Hero } from "@/components/sections/home/Hero";
+import { MissionStrip } from "@/components/sections/home/MissionStrip";
+import { PlatformIntro } from "@/components/sections/home/PlatformIntro";
+import { TechnologyPillars } from "@/components/sections/home/TechnologyPillars";
+import { ApplicationsBand } from "@/components/sections/home/ApplicationsBand";
+import { ResearchTeaser } from "@/components/sections/home/ResearchTeaser";
+import { CTABand } from "@/components/sections/home/CTABand";
+
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-grid">
-      <h1 className="font-display text-5xl text-glow">AnthRo Industries</h1>
+    <main>
+      <Hero />
+      <MissionStrip />
+      <PlatformIntro />
+      <TechnologyPillars />
+      <ApplicationsBand />
+      <ResearchTeaser />
+      <CTABand />
     </main>
   );
 }
