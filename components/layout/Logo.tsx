@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export function Logo({ className }: { className?: string }) {
+function LogoInner() {
   return (
-    <Link href="/" className={cn("group flex items-center gap-3", className)}>
+    <>
       <Image
         src="/brand/mark.png"
         alt=""
@@ -19,6 +19,21 @@ export function Logo({ className }: { className?: string }) {
           Industries
         </span>
       </span>
+    </>
+  );
+}
+
+export function Logo({ className, asLink = true }: { className?: string; asLink?: boolean }) {
+  if (!asLink) {
+    return (
+      <span className={cn("group flex cursor-pointer items-center gap-3", className)}>
+        <LogoInner />
+      </span>
+    );
+  }
+  return (
+    <Link href="/" className={cn("group flex items-center gap-3", className)}>
+      <LogoInner />
     </Link>
   );
 }

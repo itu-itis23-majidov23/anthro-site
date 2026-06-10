@@ -7,7 +7,17 @@ import { CornerFrame } from "@/components/hud/CornerFrame";
 import { GlassPanel } from "@/components/hud/GlassPanel";
 import { DataRule } from "@/components/hud/DataRule";
 
-export function ContactCard() {
+type ContactCardProps = {
+  channel?: string;
+  purposes?: string;
+  copyLabel?: string;
+};
+
+export function ContactCard({
+  channel = "Direct Channel",
+  purposes = "Partnerships · Press · Careers",
+  copyLabel = "Copy email address",
+}: ContactCardProps) {
   const [copied, setCopied] = useState(false);
 
   async function copyEmail() {
@@ -24,7 +34,7 @@ export function ContactCard() {
     <CornerFrame size={18}>
       <GlassPanel className="px-8 py-12 text-center md:px-16">
         <p className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">
-          Direct Channel
+          {channel}
         </p>
 
         <div className="mt-6 flex items-center justify-center gap-3">
@@ -37,7 +47,7 @@ export function ContactCard() {
           <button
             type="button"
             onClick={copyEmail}
-            aria-label="Copy email address"
+            aria-label={copyLabel}
             className="text-muted-foreground transition-colors hover:text-primary"
           >
             {copied ? <Check className="size-5 text-signal" /> : <Copy className="size-5" />}
@@ -45,7 +55,7 @@ export function ContactCard() {
         </div>
 
         <p className="mt-6 font-mono text-[12px] tracking-[0.2em] text-muted-foreground uppercase">
-          Partnerships · Press · Careers
+          {purposes}
         </p>
 
         <DataRule className="mt-10" />

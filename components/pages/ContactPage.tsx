@@ -1,33 +1,31 @@
-import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ScanLine } from "@/components/hud/ScanLine";
 import { GlowText } from "@/components/hud/GlowText";
 import { ContactCard } from "@/components/sections/shared/ContactCard";
 import { Reveal } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Reach AnthRo Industries — partnerships, press, and careers.",
-};
+export function ContactPage({ locale }: { locale: Locale }) {
+  const t = getDict(locale).contact;
 
-export default function ContactPage() {
   return (
     <main className="relative">
       <ScanLine />
       <PageHeader
         index="06"
-        label="Contact"
+        label={t.header.label}
         title={
           <>
-            Initiate <GlowText>Contact.</GlowText>
+            {t.header.titlePre}
+            <GlowText>{t.header.titleGlow}</GlowText>
           </>
         }
-        lede="One channel, read by humans. Tell us what you are building, deploying, or reporting on."
+        lede={t.header.lede}
       />
 
       <section className="mx-auto max-w-3xl px-6 pb-32">
         <Reveal delay={0.15}>
-          <ContactCard />
+          <ContactCard channel={t.channel} purposes={t.purposes} copyLabel={t.copyLabel} />
         </Reveal>
       </section>
     </main>

@@ -2,6 +2,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GlowText } from "@/components/hud/GlowText";
 import { HeroPoster } from "@/components/three/HeroPoster";
+import { getDict, l, type Locale } from "@/lib/i18n";
 
 function HudChrome() {
   return (
@@ -26,7 +27,9 @@ function HudChrome() {
  * Hero entrances are pure CSS (.hero-enter) rather than Motion — the headline
  * is the LCP element and must paint before hydration.
  */
-export function Hero({ visual }: { visual?: React.ReactNode }) {
+export function Hero({ visual, locale = "en" }: { visual?: React.ReactNode; locale?: Locale }) {
+  const t = getDict(locale).home.hero;
+
   return (
     <section className="relative flex min-h-svh items-center overflow-hidden">
       {visual ?? <HeroPoster />}
@@ -35,34 +38,33 @@ export function Hero({ visual }: { visual?: React.ReactNode }) {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-20">
         <div className="max-w-3xl">
           <p className="hero-enter font-mono text-[12px] tracking-[0.3em] text-primary uppercase">
-            Anthropomorphic Robotic Industries
+            {t.eyebrow}
           </p>
 
           <h1
             className="hero-enter-rise font-display mt-6 text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[1.02] text-foreground"
             style={{ animationDelay: "0.12s" }}
           >
-            Where Artificial Intelligence Becomes <GlowText>Physical.</GlowText>
+            {t.titlePre} <GlowText>{t.titleGlow}</GlowText>
           </h1>
 
           <p
             className="hero-enter mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground"
             style={{ animationDelay: "0.28s" }}
           >
-            AnthRo Industries designs and builds general-purpose humanoid robots — hardware,
-            intelligence, and control, engineered as one system.
+            {t.sub}
           </p>
 
           <div
             className="hero-enter mt-10 flex flex-wrap items-center gap-4"
             style={{ animationDelay: "0.42s" }}
           >
-            <Button href="/products/anthro-r3/" size="lg">
-              Explore the R3 Platform
+            <Button href={l(locale, "/products/anthro-r3/")} size="lg">
+              {t.ctaPrimary}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button href="/technology/" variant="ghost" size="lg">
-              Our Technology
+            <Button href={l(locale, "/technology/")} variant="ghost" size="lg">
+              {t.ctaSecondary}
             </Button>
           </div>
         </div>
@@ -70,7 +72,7 @@ export function Hero({ visual }: { visual?: React.ReactNode }) {
 
       <a
         href="#mission"
-        aria-label="Scroll to content"
+        aria-label="Scroll"
         className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-muted-foreground transition-colors hover:text-primary"
       >
         <ChevronDown className="size-5 motion-safe:animate-float" />

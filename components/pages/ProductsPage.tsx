@@ -1,49 +1,44 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Lock } from "lucide-react";
-import { classifiedPrograms, products } from "@/content/products";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { GlassPanel } from "@/components/hud/GlassPanel";
 import { CornerFrame } from "@/components/hud/CornerFrame";
 import { StatusBadge } from "@/components/hud/StatusBadge";
 import { GlowText } from "@/components/hud/GlowText";
 import { Reveal } from "@/components/motion/Reveal";
+import { getDict, l, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "AnthRo technology programs — the R-Series of general-purpose humanoid platforms.",
-};
-
-export default function ProductsPage() {
-  const r3 = products[0];
-  const r4 = classifiedPrograms[0];
+export function ProductsPage({ locale }: { locale: Locale }) {
+  const t = getDict(locale).products;
+  const r3 = t.items[0];
+  const r4 = t.r4;
 
   return (
     <main>
       <PageHeader
         index="03"
-        label="Products"
+        label={t.header.label}
         title={
           <>
-            Technology <GlowText>Programs.</GlowText>
+            {t.header.titlePre}
+            <GlowText>{t.header.titleGlow}</GlowText>
           </>
         }
-        lede="Each platform in the R-Series is a complete program: hardware, intelligence, and control developed as one system, designed to compound from one generation to the next."
+        lede={t.header.lede}
       />
 
       <section className="mx-auto max-w-7xl space-y-8 px-6 pb-32">
         {/* R3 — flagship program */}
         <Reveal>
-          <Link href={`/products/${r3.slug}/`} className="group block">
+          <Link href={l(locale, `/products/${r3.slug}/`)} className="group block">
             <GlassPanel className="glow-border-hover overflow-hidden transition-shadow duration-300">
               <div className="grid lg:grid-cols-[2fr_3fr]">
                 <CornerFrame className="m-6 lg:m-8">
                   <div className="relative aspect-square overflow-hidden border border-border bg-surface/40 lg:aspect-auto lg:h-full">
                     <Image
                       src={r3.views[0].src}
-                      alt="AnthRo R3 schematic"
+                      alt={`AnthRo R3 — ${r3.views[0].label}`}
                       fill
                       sizes="(min-width: 1024px) 40vw, 100vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -53,8 +48,8 @@ export default function ProductsPage() {
 
                 <div className="flex flex-col justify-center p-8 lg:p-12">
                   <div className="flex flex-wrap items-center gap-4">
-                    <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground">
-                      PROGRAM {r3.code}
+                    <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">
+                      {t.program} {r3.code}
                     </span>
                     <StatusBadge status={r3.status} />
                   </div>
@@ -75,7 +70,7 @@ export default function ProductsPage() {
                   </dl>
 
                   <span className="mt-10 inline-flex items-center gap-2 font-mono text-[13px] tracking-[0.12em] text-primary uppercase">
-                    View Program
+                    {t.viewProgram}
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
@@ -98,8 +93,8 @@ export default function ProductsPage() {
             <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground">
-                    PROGRAM {r4.code}
+                  <span className="font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase">
+                    {t.program} {r4.code}
                   </span>
                   <StatusBadge status="classified" />
                 </div>
@@ -117,7 +112,7 @@ export default function ProductsPage() {
         <Reveal delay={0.2}>
           <div className="flex items-center justify-center border border-dashed border-border/60 p-12 text-center">
             <p className="font-mono text-[12px] tracking-[0.25em] text-muted-foreground uppercase">
-              R-Series roadmap continues — future platforms in definition
+              {t.futureSlot}
             </p>
           </div>
         </Reveal>

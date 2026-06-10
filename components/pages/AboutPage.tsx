@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { mission, principles, timeline } from "@/content/about";
 import { site } from "@/content/site";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionLabel } from "@/components/hud/SectionLabel";
@@ -8,49 +6,47 @@ import { DataRule } from "@/components/hud/DataRule";
 import { GlowText } from "@/components/hud/GlowText";
 import { Timeline } from "@/components/sections/shared/Timeline";
 import { Reveal, Stagger } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "AnthRo Industries is building general-purpose humanoid robots for the long horizon — engineered end-to-end in Istanbul.",
-};
+export function AboutPage({ locale }: { locale: Locale }) {
+  const t = getDict(locale).about;
 
-export default function AboutPage() {
   return (
     <main>
       <PageHeader
         index="01"
-        label="Who We Are"
+        label={t.header.label}
         title={
           <>
-            Built for the <GlowText>Long Horizon.</GlowText>
+            {t.header.titlePre}
+            <GlowText>{t.header.titleGlow}</GlowText>
           </>
         }
-        lede={mission.statement}
+        lede={t.header.lede}
       />
 
       <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <SectionLabel index="02">Vision</SectionLabel>
+          <SectionLabel index="02">{t.vision.label}</SectionLabel>
           <h2 className="font-display mt-6 text-[clamp(1.8rem,3.5vw,3rem)] text-foreground">
-            The R-Series roadmap.
+            {t.vision.title}
           </h2>
         </Reveal>
         <div className="mt-14">
-          <Timeline entries={timeline} />
+          <Timeline entries={t.timeline} />
         </div>
       </section>
 
       <section className="border-y border-white/8 bg-surface/30">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
           <Reveal>
-            <SectionLabel index="03">Principles</SectionLabel>
+            <SectionLabel index="03">{t.principlesSection.label}</SectionLabel>
             <h2 className="font-display mt-6 text-[clamp(1.8rem,3.5vw,3rem)] text-foreground">
-              How we engineer.
+              {t.principlesSection.title}
             </h2>
           </Reveal>
           <Stagger className="mt-14 grid gap-6 md:grid-cols-2" staggerDelay={0.1}>
-            {principles.map((p) => (
+            {t.principles.map((p) => (
               <GlassPanel key={p.code} className="h-full p-8">
                 <span className="font-mono text-[10px] tracking-[0.25em] text-primary">
                   {p.code}
@@ -67,7 +63,7 @@ export default function AboutPage() {
         <Reveal>
           <DataRule label={site.coordinates} />
           <p className="font-display mt-12 text-center text-[clamp(1.5rem,3vw,2.4rem)] text-foreground">
-            Engineered in Istanbul. <span className="text-muted-foreground">Built for the world.</span>
+            {t.istanbul.pre} <span className="text-muted-foreground">{t.istanbul.post}</span>
           </p>
         </Reveal>
       </section>

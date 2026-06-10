@@ -1,40 +1,36 @@
-import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { disciplines, values } from "@/content/careers";
 import { site } from "@/content/site";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { GlassPanel } from "@/components/hud/GlassPanel";
 import { SectionLabel } from "@/components/hud/SectionLabel";
 import { GlowText } from "@/components/hud/GlowText";
 import { Reveal, Stagger } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description:
-    "Join AnthRo Industries — small teams, hard problems, full ownership. Engineering humanoid robots in Istanbul.",
-};
+export function CareersPage({ locale }: { locale: Locale }) {
+  const t = getDict(locale).careers;
 
-export default function CareersPage() {
   return (
     <main>
       <PageHeader
         index="05"
-        label="Careers"
+        label={t.header.label}
         title={
           <>
-            Build What <GlowText>Doesn&apos;t Exist Yet.</GlowText>
+            {t.header.titlePre}
+            <GlowText>{t.header.titleGlow}</GlowText>
           </>
         }
-        lede="Small teams. Hard problems. Full ownership. We hire engineers who want their work to stand up and walk."
+        lede={t.header.lede}
       />
 
       <section className="border-y border-white/8 bg-surface/30">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <Reveal>
-            <SectionLabel index="01">How We Work</SectionLabel>
+            <SectionLabel index="01">{t.howWeWork}</SectionLabel>
           </Reveal>
           <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" staggerDelay={0.1}>
-            {values.map((value) => (
+            {t.values.map((value) => (
               <div key={value.title} className="border-l border-border pl-6">
                 <h2 className="font-display text-lg text-foreground">{value.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{value.body}</p>
@@ -46,17 +42,17 @@ export default function CareersPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-20 md:py-28">
         <Reveal>
-          <SectionLabel index="02">Open Disciplines</SectionLabel>
+          <SectionLabel index="02">{t.disciplinesSection.label}</SectionLabel>
           <h2 className="font-display mt-6 text-[clamp(1.8rem,3.5vw,3rem)] text-foreground">
-            Where we&apos;re hiring.
+            {t.disciplinesSection.title}
           </h2>
         </Reveal>
 
         <Stagger className="mt-12 grid gap-px sm:grid-cols-2 lg:grid-cols-3" staggerDelay={0.08}>
-          {disciplines.map((d) => (
+          {t.disciplines.map((d) => (
             <a
               key={d.code}
-              href={`mailto:${site.email}?subject=Application — ${d.title}`}
+              href={`mailto:${site.email}?subject=${t.applySubject} — ${d.title}`}
               className="group block h-full"
             >
               <GlassPanel className="glow-border-hover h-full p-7 transition-shadow duration-300">
@@ -66,7 +62,7 @@ export default function CareersPage() {
                 <h3 className="font-display mt-4 text-lg text-foreground">{d.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.blurb}</p>
                 <span className="mt-6 inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.15em] text-primary uppercase">
-                  Apply
+                  {t.apply}
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                 </span>
               </GlassPanel>
@@ -78,10 +74,10 @@ export default function CareersPage() {
       <section className="mx-auto max-w-4xl px-6 pb-32 text-center">
         <Reveal>
           <p className="font-mono text-[12px] tracking-[0.25em] text-muted-foreground uppercase">
-            {site.location} — relocation supported
+            {t.istanbulNote}
           </p>
           <p className="font-display mt-6 text-[clamp(1.4rem,2.8vw,2.2rem)] text-foreground">
-            The lab is in Istanbul. <span className="text-muted-foreground">The mission is everywhere.</span>
+            {t.istanbulPre} <span className="text-muted-foreground">{t.istanbulPost}</span>
           </p>
         </Reveal>
       </section>

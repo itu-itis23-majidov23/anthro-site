@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { getProduct, products } from "@/content/products";
 import { SectionLabel } from "@/components/hud/SectionLabel";
 import { StatusBadge } from "@/components/hud/StatusBadge";
 import { AnimatedCounter } from "@/components/hud/AnimatedCounter";
@@ -11,34 +9,11 @@ import { GlowText } from "@/components/hud/GlowText";
 import { Button } from "@/components/ui/Button";
 import { SchematicViewer } from "@/components/sections/product/SchematicViewer";
 import { Reveal, Stagger } from "@/components/motion/Reveal";
+import { getDict, l, type Locale } from "@/lib/i18n";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const product = getProduct(slug);
-  if (!product) return {};
-  return {
-    title: product.name,
-    description: product.summary,
-  };
-}
-
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const product = getProduct(slug);
+export function ProductDetailPage({ slug, locale }: { slug: string; locale: Locale }) {
+  const t = getDict(locale).products;
+  const product = t.items.find((p) => p.slug === slug);
   if (!product) notFound();
 
   return (
@@ -48,7 +23,7 @@ export default async function ProductPage({
         <div aria-hidden className="bg-grid mask-fade-b absolute inset-0 opacity-40" />
         <div className="relative mx-auto max-w-6xl px-6">
           <Reveal>
-            <SectionLabel>{`${product.code} — General-Purpose Humanoid Platform`}</SectionLabel>
+            <SectionLabel>{`${product.code} — ${t.detail.platformLabel}`}</SectionLabel>
             <div className="mt-6 flex flex-wrap items-center gap-5">
               <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-foreground">
                 {product.name.replace(product.code, "")}
@@ -91,8 +66,8 @@ export default async function ProductPage({
 
           <div>
             <Reveal>
-              <SectionLabel index="01">Specifications</SectionLabel>
-              <h2 className="font-display mt-6 text-3xl text-foreground">Platform data.</h2>
+              <SectionLabel index="01">{t.detail.specsLabel}</SectionLabel>
+              <h2 className="font-display mt-6 text-3xl text-foreground">{t.detail.specsTitle}</h2>
             </Reveal>
             <Reveal delay={0.15}>
               <div className="mt-8 divide-y divide-border/60">
@@ -112,8 +87,10 @@ export default async function ProductPage({
       <section className="border-y border-white/8 bg-surface/30">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
           <Reveal>
-            <SectionLabel index="02">Deployment</SectionLabel>
-            <h2 className="font-display mt-6 text-3xl text-foreground">Where {product.code} works.</h2>
+            <SectionLabel index="02">{t.detail.deploymentLabel}</SectionLabel>
+            <h2 className="font-display mt-6 text-3xl text-foreground">
+              {t.detail.deploymentTitle(product.code)}
+            </h2>
           </Reveal>
           <Stagger className="mt-12 grid gap-6 md:grid-cols-3" staggerDelay={0.12}>
             {product.applications.map((app) => (
@@ -133,13 +110,11 @@ export default async function ProductPage({
       <section className="mx-auto max-w-4xl px-6 py-24 text-center md:py-32">
         <Reveal>
           <h2 className="font-display text-[clamp(1.8rem,3.5vw,2.8rem)] text-foreground">
-            Partner with the {product.code} program.
+            {t.detail.ctaTitle(product.code)}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            We work with a small number of deployment partners in logistics and industry.
-          </p>
-          <Button href="/contact/" size="lg" className="mt-10">
-            Contact AnthRo
+          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{t.detail.ctaSub}</p>
+          <Button href={l(locale, "/contact/")} size="lg" className="mt-10">
+            {t.detail.ctaButton}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </Reveal>

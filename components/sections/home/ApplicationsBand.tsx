@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { products } from "@/content/products";
 import { SectionLabel } from "@/components/hud/SectionLabel";
 import { GlassPanel } from "@/components/hud/GlassPanel";
 import { Reveal, Stagger } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-export function ApplicationsBand() {
-  const applications = products[0].applications;
+export function ApplicationsBand({ locale = "en" }: { locale?: Locale }) {
+  const d = getDict(locale);
+  const t = d.home.applications;
+  const applications = d.products.items[0].applications;
 
   return (
     <section className="relative overflow-hidden">
@@ -22,9 +24,9 @@ export function ApplicationsBand() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-36">
         <Reveal>
-          <SectionLabel index="03">Deployment</SectionLabel>
+          <SectionLabel index="03">{t.label}</SectionLabel>
           <h2 className="font-display mt-6 max-w-2xl text-[clamp(1.8rem,3.5vw,3rem)] text-foreground">
-            Built for the places work actually happens.
+            {t.title}
           </h2>
         </Reveal>
 

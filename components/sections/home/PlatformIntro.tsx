@@ -1,14 +1,16 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { products } from "@/content/products";
 import { CornerFrame } from "@/components/hud/CornerFrame";
 import { SectionLabel } from "@/components/hud/SectionLabel";
 import { StatusBadge } from "@/components/hud/StatusBadge";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
+import { getDict, l, type Locale } from "@/lib/i18n";
 
-export function PlatformIntro() {
-  const r3 = products[0];
+export function PlatformIntro({ locale = "en" }: { locale?: Locale }) {
+  const d = getDict(locale);
+  const t = d.home.platform;
+  const r3 = d.products.items[0];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 md:py-36">
@@ -17,7 +19,7 @@ export function PlatformIntro() {
           <CornerFrame className="clip-corner">
             <Image
               src="/images/hero-robot.avif"
-              alt="AnthRo R3 humanoid robot in development"
+              alt="AnthRo R3"
               width={1920}
               height={1080}
               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -28,7 +30,7 @@ export function PlatformIntro() {
 
         <div>
           <Reveal>
-            <SectionLabel index="01">Flagship Platform</SectionLabel>
+            <SectionLabel index="01">{t.label}</SectionLabel>
             <div className="mt-6 flex items-center gap-4">
               <h2 className="font-display text-[clamp(1.8rem,3.5vw,3rem)] text-foreground">
                 AnthRo {r3.code}
@@ -55,8 +57,8 @@ export function PlatformIntro() {
           </Reveal>
 
           <Reveal delay={0.25}>
-            <Button href={`/products/${r3.slug}/`} variant="ghost" className="mt-10">
-              View Program
+            <Button href={l(locale, `/products/${r3.slug}/`)} variant="ghost" className="mt-10">
+              {t.viewProgram}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Reveal>

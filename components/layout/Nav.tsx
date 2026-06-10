@@ -4,12 +4,43 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { navLinks } from "@/content/site";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/Button";
+import { getDict, l, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-export function Nav() {
+function LocaleSwitch({ locale }: { locale: Locale }) {
+  const pathname = usePathname() ?? "/";
+  const basePath = pathname.startsWith("/tr") ? pathname.slice(3) || "/" : pathname;
+  const targets: { code: Locale; href: string }[] = [
+    { code: "en", href: basePath },
+    { code: "tr", href: `/tr${basePath === "/" ? "/" : basePath}` },
+  ];
+
+  return (
+    <span className="flex items-center gap-1 font-mono text-[11px] tracking-[0.15em]">
+      {targets.map((t, i) => (
+        <span key={t.code} className="flex items-center gap-1">
+          {i > 0 && <span aria-hidden className="text-muted-foreground/40">/</span>}
+          <Link
+            href={t.href}
+            hrefLang={t.code}
+            aria-current={t.code === locale ? "true" : undefined}
+            className={cn(
+              "uppercase transition-colors",
+              t.code === locale ? "text-primary" : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {t.code}
+          </Link>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+export function Nav({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale).nav;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -35,15 +66,18 @@ export function Nav() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Logo />
+        <Link href={l(locale, "/")} className="contents">
+          <Logo asLink={false} />
+        </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {navLinks.map((link) => {
-            const active = pathname?.startsWith(link.href.replace(/\/$/, ""));
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+          {t.links.map((link) => {
+            const href = l(locale, link.href);
+            const active = pathname?.startsWith(href.replace(/\/$/, ""));
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 className={cn(
                   "font-mono text-[12px] tracking-[0.18em] uppercase transition-colors",
                   active ? "text-primary" : "text-muted-foreground hover:text-foreground",
@@ -53,9 +87,10 @@ export function Nav() {
               </Link>
             );
           })}
-          <Button href="/contact/" variant="ghost" size="sm">
-            Contact
+          <Button href={l(locale, "/contact/")} variant="ghost" size="sm">
+            {t.contact}
           </Button>
+          <LocaleSwitch locale={locale} />
         </nav>
 
         <button
@@ -75,21 +110,24 @@ export function Nav() {
           aria-label="Primary mobile"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-6">
-            {navLinks.map((link) => (
+            {t.links.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={l(locale, link.href)}
                 className="py-3 font-mono text-sm tracking-[0.18em] text-muted-foreground uppercase transition-colors hover:text-primary"
               >
                 {link.label}
               </Link>
             ))}
             <Link
-              href="/contact/"
+              href={l(locale, "/contact/")}
               className="py-3 font-mono text-sm tracking-[0.18em] text-primary uppercase"
             >
-              Contact
+              {t.contact}
             </Link>
+            <div className="py-3">
+              <LocaleSwitch locale={locale} />
+            </div>
           </div>
         </nav>
       )}

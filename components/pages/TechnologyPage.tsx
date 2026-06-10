@@ -1,38 +1,34 @@
-import type { Metadata } from "next";
-import { technologyPillars } from "@/content/technology";
-import { products } from "@/content/products";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { GlowText } from "@/components/hud/GlowText";
 import { AnimatedCounter } from "@/components/hud/AnimatedCounter";
 import { TechnologyStory } from "@/components/sections/technology/TechnologyStory";
 import { Reveal } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Technology",
-  description:
-    "Humanoid robotics, AI systems, autonomy, robotics software, physical intelligence, and simulation — engineered as one system at AnthRo.",
-};
+export function TechnologyPage({ locale }: { locale: Locale }) {
+  const d = getDict(locale);
+  const t = d.technology;
+  const metrics = d.products.items[0].metrics;
 
-export default function TechnologyPage() {
   return (
     <main>
       <PageHeader
         index="02"
-        label="Technology"
+        label={t.header.label}
         title={
           <>
-            One System. Engineered <GlowText>End-to-End.</GlowText>
+            {t.header.titlePre}
+            <GlowText>{t.header.titleGlow}</GlowText>
           </>
         }
-        lede="A humanoid robot is not a collection of subsystems. Actuation, perception, control, and intelligence only perform when they are designed together — so we build all of them."
+        lede={t.header.lede}
       />
 
-      <TechnologyStory pillars={technologyPillars} />
+      <TechnologyStory pillars={t.pillars} />
 
-      {/* Closing stat band */}
       <section className="mt-24 border-y border-white/8 bg-surface/40">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-6 py-16 lg:grid-cols-4">
-          {products[0].metrics.map((metric, i) => (
+          {metrics.map((metric, i) => (
             <Reveal key={metric.label} delay={0.1 * i}>
               <div className="border-l-2 border-primary/40 pl-5">
                 <AnimatedCounter

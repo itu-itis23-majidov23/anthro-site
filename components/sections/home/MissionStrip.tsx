@@ -1,25 +1,21 @@
 import { AnimatedCounter } from "@/components/hud/AnimatedCounter";
 import { Reveal } from "@/components/motion/Reveal";
+import { getDict, type Locale } from "@/lib/i18n";
 
-const stats = [
-  { value: "1kHz", label: "Whole-body control loop" },
-  { value: "32+", label: "Degrees of freedom" },
-  { value: "100%", label: "In-house stack" },
-];
+export function MissionStrip({ locale = "en" }: { locale?: Locale }) {
+  const t = getDict(locale).home.mission;
 
-export function MissionStrip() {
   return (
     <section id="mission" className="border-y border-white/8 bg-surface/40">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
           <p className="font-display max-w-3xl text-[clamp(1.5rem,3vw,2.4rem)] leading-snug text-foreground">
-            We are building the machines that will work alongside humanity for the next fifty
-            years.
+            {t.statement}
           </p>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-3">
-          {stats.map((stat, i) => (
+          {t.stats.map((stat, i) => (
             <Reveal key={stat.label} delay={0.15 * i}>
               <div className="border-l-2 border-primary/40 pl-5">
                 <AnimatedCounter
