@@ -6,11 +6,12 @@ import { ApplicationsBand } from "@/components/sections/home/ApplicationsBand";
 import { ResearchTeaser } from "@/components/sections/home/ResearchTeaser";
 import { CTABand } from "@/components/sections/home/CTABand";
 import { NeuralField } from "@/components/canvas2d/NeuralField";
+import { HeroCanvas } from "@/components/three/HeroCanvas";
 
 export default function HomePage() {
   return (
     <main>
-      <Hero />
+      <Hero visual={<HeroCanvas />} />
       <MissionStrip />
       <PlatformIntro />
       <TechnologyPillars />
