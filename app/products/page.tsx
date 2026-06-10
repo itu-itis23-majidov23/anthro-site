@@ -116,7 +116,7 @@ export default function ProductsPage() {
         {/* Future platforms ghost slot */}
         <Reveal delay={0.2}>
           <div className="flex items-center justify-center border border-dashed border-border/60 p-12 text-center">
-            <p className="font-mono text-[12px] tracking-[0.25em] text-muted-foreground/60 uppercase">
+            <p className="font-mono text-[12px] tracking-[0.25em] text-muted-foreground uppercase">
               R-Series roadmap continues — future platforms in definition
             </p>
           </div>

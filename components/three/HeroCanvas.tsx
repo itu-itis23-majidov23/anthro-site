@@ -23,13 +23,20 @@ export function HeroCanvas() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const probe = document.createElement("canvas");
-    if (!probe.getContext("webgl2")) return;
+    const gl = probe.getContext("webgl2");
+    if (!gl) return;
+    // software rasterizers can't afford 15k additive particles — keep the poster
+    // (?gl=force bypasses, for headless screenshot tooling)
+    const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : "";
+    if (/swiftshader|llvmpipe|softpipe|software/i.test(renderer) && !window.location.search.includes("gl=force"))
+      return;
 
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(() => setMount(true), { timeout: 1500 });
+      const id = window.requestIdleCallback(() => setMount(true), { timeout: 2500 });
       return () => window.cancelIdleCallback(id);
     }
-    const id = window.setTimeout(() => setMount(true), 800);
+    const id = window.setTimeout(() => setMount(true), 2000);
     return () => window.clearTimeout(id);
   }, []);
 

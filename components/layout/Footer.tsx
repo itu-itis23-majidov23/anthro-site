@@ -46,10 +46,10 @@ export function Footer() {
         <DataRule label="anthro.industries" className="mt-16" />
 
         <div className="mt-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-          <p className="font-mono text-[11px] tracking-[0.15em] text-muted-foreground/70 uppercase">
+          <p className="font-mono text-[11px] tracking-[0.15em] text-muted-foreground uppercase">
             © 2026 AnthRo Industries — {site.location}
           </p>
-          <p className="font-mono text-[11px] tracking-[0.15em] text-muted-foreground/50">
+          <p className="font-mono text-[11px] tracking-[0.15em] text-muted-foreground">
             {site.coordinates}
           </p>
         </div>

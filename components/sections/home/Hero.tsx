@@ -2,11 +2,10 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { GlowText } from "@/components/hud/GlowText";
 import { HeroPoster } from "@/components/three/HeroPoster";
-import { Reveal } from "@/components/motion/Reveal";
 
 function HudChrome() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-x-6 inset-y-20 hidden font-mono text-[10px] tracking-[0.25em] text-muted-foreground/60 uppercase md:block">
+    <div aria-hidden className="pointer-events-none absolute inset-x-6 inset-y-20 hidden font-mono text-[10px] tracking-[0.25em] text-muted-foreground uppercase md:block">
       <span className="absolute top-0 left-0 border-t-2 border-l-2 border-primary/30 pt-2 pl-2">
         Anthro Industries // Humanoid Systems
       </span>
@@ -23,6 +22,10 @@ function HudChrome() {
   );
 }
 
+/**
+ * Hero entrances are pure CSS (.hero-enter) rather than Motion — the headline
+ * is the LCP element and must paint before hydration.
+ */
 export function Hero({ visual }: { visual?: React.ReactNode }) {
   return (
     <section className="relative flex min-h-svh items-center overflow-hidden">
@@ -31,37 +34,37 @@ export function Hero({ visual }: { visual?: React.ReactNode }) {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-20">
         <div className="max-w-3xl">
-          <Reveal delay={0.1}>
-            <p className="font-mono text-[12px] tracking-[0.3em] text-primary uppercase">
-              Anthropomorphic Robotic Industries
-            </p>
-          </Reveal>
+          <p className="hero-enter font-mono text-[12px] tracking-[0.3em] text-primary uppercase">
+            Anthropomorphic Robotic Industries
+          </p>
 
-          <Reveal delay={0.25}>
-            <h1 className="font-display mt-6 text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[1.02] text-foreground">
-              Where Artificial Intelligence Becomes{" "}
-              <GlowText>Physical.</GlowText>
-            </h1>
-          </Reveal>
+          <h1
+            className="hero-enter-rise font-display mt-6 text-[clamp(2.6rem,6.5vw,5.5rem)] leading-[1.02] text-foreground"
+            style={{ animationDelay: "0.12s" }}
+          >
+            Where Artificial Intelligence Becomes <GlowText>Physical.</GlowText>
+          </h1>
 
-          <Reveal delay={0.45}>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              AnthRo Industries designs and builds general-purpose humanoid robots — hardware,
-              intelligence, and control, engineered as one system.
-            </p>
-          </Reveal>
+          <p
+            className="hero-enter mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            style={{ animationDelay: "0.28s" }}
+          >
+            AnthRo Industries designs and builds general-purpose humanoid robots — hardware,
+            intelligence, and control, engineered as one system.
+          </p>
 
-          <Reveal delay={0.6}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="/products/anthro-r3/" size="lg">
-                Explore the R3 Platform
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button href="/technology/" variant="ghost" size="lg">
-                Our Technology
-              </Button>
-            </div>
-          </Reveal>
+          <div
+            className="hero-enter mt-10 flex flex-wrap items-center gap-4"
+            style={{ animationDelay: "0.42s" }}
+          >
+            <Button href="/products/anthro-r3/" size="lg">
+              Explore the R3 Platform
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button href="/technology/" variant="ghost" size="lg">
+              Our Technology
+            </Button>
+          </div>
         </div>
       </div>
 

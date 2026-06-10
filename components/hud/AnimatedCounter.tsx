@@ -19,13 +19,14 @@ export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
   const suffix = match?.[3] ?? "";
   const decimals = match?.[2].includes(".") ? 1 : 0;
 
+  const hasNumber = match !== null;
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const reduced = useReducedMotion();
   const [display, setDisplay] = useState(reduced ? target : 0);
 
   useEffect(() => {
-    if (!inView || !match) return;
+    if (!inView || !hasNumber) return;
     if (reduced) {
       setDisplay(target);
       return;
@@ -36,7 +37,9 @@ export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
       onUpdate: (v) => setDisplay(v),
     });
     return () => controls.stop();
-  }, [inView, target, reduced, match]);
+    // `match` is a fresh array each render — depending on it would stop the
+    // animation on every onUpdate re-render
+  }, [inView, target, reduced, hasNumber]);
 
   if (!match) {
     return <span className={className}>{value}</span>;

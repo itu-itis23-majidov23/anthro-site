@@ -5,27 +5,37 @@ import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import "./globals.css";
 
+// "latin" covers U+00FF incl. ü ("Türkiye") — latin-ext not needed for site copy
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  weight: ["400", "600"],
   variable: "--font-space-grotesk",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  subsets: ["latin"],
+  weight: ["400"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://anthro.industries"),
   title: {
     default: "AnthRo Industries — Where Artificial Intelligence Becomes Physical",
     template: "%s — AnthRo Industries",
   },
   description:
     "AnthRo Industries designs and builds general-purpose humanoid robots — hardware, intelligence, and control, engineered as one system.",
+  openGraph: {
+    siteName: "AnthRo Industries",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport: Viewport = {

@@ -5,7 +5,7 @@ export function DataRule({ label, className }: { label?: string; className?: str
     <div aria-hidden className={cn("flex items-center gap-4", className)}>
       <span className="h-px flex-1 bg-border" />
       {label && (
-        <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/60 uppercase">
+        <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase">
           {label}
         </span>
       )}

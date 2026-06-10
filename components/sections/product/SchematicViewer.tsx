@@ -31,7 +31,7 @@ export function SchematicViewer({ views }: { views: SchematicView[] }) {
             </button>
           ))}
         </div>
-        <span className="hidden font-mono text-[11px] tracking-[0.25em] text-muted-foreground/70 sm:block">
+        <span className="hidden font-mono text-[11px] tracking-[0.25em] text-muted-foreground sm:block">
           VIEW {active.code}
         </span>
       </div>

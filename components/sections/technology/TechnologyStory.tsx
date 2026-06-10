@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 function PillarVisual({ pillar, index, total }: { pillar: TechnologyPillar; index: number; total: number }) {
   return (
     <div className="flex h-full flex-col justify-center">
-      <div className="flex items-baseline justify-between font-mono text-muted-foreground/70">
+      <div className="flex items-baseline justify-between font-mono text-muted-foreground">
         <span className="text-[11px] tracking-[0.3em]">{pillar.code}</span>
         <span className="text-[11px] tracking-[0.3em]">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}

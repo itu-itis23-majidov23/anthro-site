@@ -21,7 +21,7 @@ export function TechnologyPillars() {
             <Link key={pillar.code} href="/technology/" className="group block h-full">
               <GlassPanel className="glow-border-hover h-full p-7 transition-shadow duration-300">
                 <div className="flex items-start justify-between">
-                  <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground/70">
+                  <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">
                     {pillar.code}
                   </span>
                   <ArrowUpRight className="size-4 text-muted-foreground/50 transition-colors group-hover:text-primary" />

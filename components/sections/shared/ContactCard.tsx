@@ -50,7 +50,7 @@ export function ContactCard() {
 
         <DataRule className="mt-10" />
 
-        <p className="mt-6 font-mono text-[11px] tracking-[0.2em] text-muted-foreground/70 uppercase">
+        <p className="mt-6 font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
           {site.location} — {site.coordinates}
         </p>
       </GlassPanel>

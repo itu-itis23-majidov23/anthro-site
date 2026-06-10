@@ -60,7 +60,7 @@ export default function CareersPage() {
               className="group block h-full"
             >
               <GlassPanel className="glow-border-hover h-full p-7 transition-shadow duration-300">
-                <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground/70">
+                <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">
                   {d.code}
                 </span>
                 <h3 className="font-display mt-4 text-lg text-foreground">{d.title}</h3>
