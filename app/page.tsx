@@ -5,6 +5,7 @@ import { TechnologyPillars } from "@/components/sections/home/TechnologyPillars"
 import { ApplicationsBand } from "@/components/sections/home/ApplicationsBand";
 import { ResearchTeaser } from "@/components/sections/home/ResearchTeaser";
 import { CTABand } from "@/components/sections/home/CTABand";
+import { NeuralField } from "@/components/canvas2d/NeuralField";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
       <PlatformIntro />
       <TechnologyPillars />
       <ApplicationsBand />
-      <ResearchTeaser />
+      <ResearchTeaser background={<NeuralField className="mask-radial opacity-50" />} />
       <CTABand />
     </main>
   );
